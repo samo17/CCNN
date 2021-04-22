@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-measure.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title>Mapa de Comunidades Tituladas</title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-measure.js"></script>
+        <script src="data/LORETO_1.js"></script>
+        <script src="data/PROVINCIAS_2.js"></script>
+        <script src="data/Areas_Conservacion_Regional_Privada_3.js"></script>
+        <script src="data/CCCampasinasTituladas_4.js"></script>
+        <script src="data/CCNN_Tituladas_Sin_Georeferencia_5.js"></script>
+        <script src="data/CCNN_Tituladas_Georeferenciadas_6.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[-8.883331448620636,-79.49432640629529],[0.4303351049955521,-63.17464353987196]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var measureControl = new L.Control.Measure({
+            position: 'topleft',
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+        measureControl.addTo(map);
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .innerHTML = '';
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .className += ' fas fa-ruler';
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_GoogleSatellite_0');
+        map.getPane('pane_GoogleSatellite_0').style.zIndex = 400;
+        var layer_GoogleSatellite_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleSatellite_0',
+            opacity: 1.0,
+            attribution: '<a href="https://www.google.at/permissions/geoguidelines/attr-guide.html">Map data ©2015 Google</a>',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 20
+        });
+        layer_GoogleSatellite_0;
+        map.addLayer(layer_GoogleSatellite_0);
+        function pop_LORETO_1(feature, layer) {
+        }
+
+        function style_LORETO_1_0() {
+            return {
+                pane: 'pane_LORETO_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(105,105,114,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_LORETO_1');
+        map.getPane('pane_LORETO_1').style.zIndex = 401;
+        map.getPane('pane_LORETO_1').style['mix-blend-mode'] = 'normal';
+        var layer_LORETO_1 = new L.geoJson(json_LORETO_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_LORETO_1',
+            layerName: 'layer_LORETO_1',
+            pane: 'pane_LORETO_1',
+            onEachFeature: pop_LORETO_1,
+            style: style_LORETO_1_0,
+        });
+        bounds_group.addLayer(layer_LORETO_1);
+        map.addLayer(layer_LORETO_1);
+        function pop_PROVINCIAS_2(feature, layer) {
+        }
+
+        function style_PROVINCIAS_2_0(feature) {
+            switch(String(feature.properties['q2wHide_NOMOBJ'])) {
+                case 'ALTO AMAZONAS':
+                    return {
+                pane: 'pane_PROVINCIAS_2',
+                opacity: 1,
+                color: 'rgba(128,152,72,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(68,1,84,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'DATEM DEL MARAÑON':
+                    return {
+                pane: 'pane_PROVINCIAS_2',
+                opacity: 1,
+                color: 'rgba(128,152,72,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(70,44,123,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'LORETO':
+                    return {
+                pane: 'pane_PROVINCIAS_2',
+                opacity: 1,
+                color: 'rgba(128,152,72,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(58,82,139,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'MARISCAL RAMON CASTILLA':
+                    return {
+                pane: 'pane_PROVINCIAS_2',
+                opacity: 1,
+                color: 'rgba(128,152,72,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(43,114,142,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'MAYNAS':
+                    return {
+                pane: 'pane_PROVINCIAS_2',
+                opacity: 1,
+                color: 'rgba(128,152,72,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(32,144,141,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'PUTUMAYO':
+                    return {
+                pane: 'pane_PROVINCIAS_2',
+                opacity: 1,
+                color: 'rgba(128,152,72,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(39,174,128,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'REQUENA':
+                    return {
+                pane: 'pane_PROVINCIAS_2',
+                opacity: 1,
+                color: 'rgba(128,152,72,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(93,201,98,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'UCAYALI':
+                    return {
+                pane: 'pane_PROVINCIAS_2',
+                opacity: 1,
+                color: 'rgba(128,152,72,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(171,220,50,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_PROVINCIAS_2');
+        map.getPane('pane_PROVINCIAS_2').style.zIndex = 402;
+        map.getPane('pane_PROVINCIAS_2').style['mix-blend-mode'] = 'normal';
+        var layer_PROVINCIAS_2 = new L.geoJson(json_PROVINCIAS_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_PROVINCIAS_2',
+            layerName: 'layer_PROVINCIAS_2',
+            pane: 'pane_PROVINCIAS_2',
+            onEachFeature: pop_PROVINCIAS_2,
+            style: style_PROVINCIAS_2_0,
+        });
+        bounds_group.addLayer(layer_PROVINCIAS_2);
+        map.addLayer(layer_PROVINCIAS_2);
+        function pop_Areas_Conservacion_Regional_Privada_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NOMBRE'] !== null ? autolinker.link(feature.properties['NOMBRE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Areas_Conservacion_Regional_Privada_3_0() {
+            return {
+                pane: 'pane_Areas_Conservacion_Regional_Privada_3',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(35,117,152,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Areas_Conservacion_Regional_Privada_3');
+        map.getPane('pane_Areas_Conservacion_Regional_Privada_3').style.zIndex = 403;
+        map.getPane('pane_Areas_Conservacion_Regional_Privada_3').style['mix-blend-mode'] = 'normal';
+        var layer_Areas_Conservacion_Regional_Privada_3 = new L.geoJson(json_Areas_Conservacion_Regional_Privada_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Areas_Conservacion_Regional_Privada_3',
+            layerName: 'layer_Areas_Conservacion_Regional_Privada_3',
+            pane: 'pane_Areas_Conservacion_Regional_Privada_3',
+            onEachFeature: pop_Areas_Conservacion_Regional_Privada_3,
+            style: style_Areas_Conservacion_Regional_Privada_3_0,
+        });
+        bounds_group.addLayer(layer_Areas_Conservacion_Regional_Privada_3);
+        function pop_CCCampasinasTituladas_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">FUENTE</th>\
+                        <td>' + (feature.properties['FUENTE'] !== null ? autolinker.link(feature.properties['FUENTE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">RESREG</th>\
+                        <td>' + (feature.properties['RESREG'] !== null ? autolinker.link(feature.properties['RESREG'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">RESREC</th>\
+                        <td>' + (feature.properties['RESREC'] !== null ? autolinker.link(feature.properties['RESREC'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">LEYTIT</th>\
+                        <td>' + (feature.properties['LEYTIT'] !== null ? autolinker.link(feature.properties['LEYTIT'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">PROCES</th>\
+                        <td>' + (feature.properties['PROCES'] !== null ? autolinker.link(feature.properties['PROCES'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">NOMCOM</th>\
+                        <td>' + (feature.properties['NOMCOM'] !== null ? autolinker.link(feature.properties['NOMCOM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SECTOR</th>\
+                        <td>' + (feature.properties['SECTOR'] !== null ? autolinker.link(feature.properties['SECTOR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">RESTIT</th>\
+                        <td>' + (feature.properties['RESTIT'] !== null ? autolinker.link(feature.properties['RESTIT'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">FERETI</th>\
+                        <td>' + (feature.properties['FERETI'] !== null ? autolinker.link(feature.properties['FERETI'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">NUMTIT</th>\
+                        <td>' + (feature.properties['NUMTIT'] !== null ? autolinker.link(feature.properties['NUMTIT'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">FECTIT</th>\
+                        <td>' + (feature.properties['FECTIT'] !== null ? autolinker.link(feature.properties['FECTIT'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">PARREG</th>\
+                        <td>' + (feature.properties['PARREG'] !== null ? autolinker.link(feature.properties['PARREG'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">FEINREG</th>\
+                        <td>' + (feature.properties['FEINREG'] !== null ? autolinker.link(feature.properties['FEINREG'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">PROVIN</th>\
+                        <td>' + (feature.properties['PROVIN'] !== null ? autolinker.link(feature.properties['PROVIN'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">DISTRI</th>\
+                        <td>' + (feature.properties['DISTRI'] !== null ? autolinker.link(feature.properties['DISTRI'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">PERMAT</th>\
+                        <td>' + (feature.properties['PERMAT'] !== null ? autolinker.link(feature.properties['PERMAT'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SUPMAT</th>\
+                        <td>' + (feature.properties['SUPMAT'] !== null ? autolinker.link(feature.properties['SUPMAT'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_CCCampasinasTituladas_4_0() {
+            return {
+                pane: 'pane_CCCampasinasTituladas_4',
+                opacity: 1,
+                color: 'rgba(255,210,127,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,250,200,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_CCCampasinasTituladas_4');
+        map.getPane('pane_CCCampasinasTituladas_4').style.zIndex = 404;
+        map.getPane('pane_CCCampasinasTituladas_4').style['mix-blend-mode'] = 'normal';
+        var layer_CCCampasinasTituladas_4 = new L.geoJson(json_CCCampasinasTituladas_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_CCCampasinasTituladas_4',
+            layerName: 'layer_CCCampasinasTituladas_4',
+            pane: 'pane_CCCampasinasTituladas_4',
+            onEachFeature: pop_CCCampasinasTituladas_4,
+            style: style_CCCampasinasTituladas_4_0,
+        });
+        bounds_group.addLayer(layer_CCCampasinasTituladas_4);
+        function pop_CCNN_Tituladas_Sin_Georeferencia_5(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">NOMCOM</th>\
+                        <td>' + (feature.properties['NOMCOM'] !== null ? autolinker.link(feature.properties['NOMCOM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SUPSIG</th>\
+                        <td>' + (feature.properties['SUPSIG'] !== null ? autolinker.link(feature.properties['SUPSIG'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_CCNN_Tituladas_Sin_Georeferencia_5_0() {
+            return {
+                pane: 'pane_CCNN_Tituladas_Sin_Georeferencia_5',
+                opacity: 1,
+                color: 'rgba(255,190,232,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,245,237,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_CCNN_Tituladas_Sin_Georeferencia_5');
+        map.getPane('pane_CCNN_Tituladas_Sin_Georeferencia_5').style.zIndex = 405;
+        map.getPane('pane_CCNN_Tituladas_Sin_Georeferencia_5').style['mix-blend-mode'] = 'normal';
+        var layer_CCNN_Tituladas_Sin_Georeferencia_5 = new L.geoJson(json_CCNN_Tituladas_Sin_Georeferencia_5, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_CCNN_Tituladas_Sin_Georeferencia_5',
+            layerName: 'layer_CCNN_Tituladas_Sin_Georeferencia_5',
+            pane: 'pane_CCNN_Tituladas_Sin_Georeferencia_5',
+            onEachFeature: pop_CCNN_Tituladas_Sin_Georeferencia_5,
+            style: style_CCNN_Tituladas_Sin_Georeferencia_5_0,
+        });
+        bounds_group.addLayer(layer_CCNN_Tituladas_Sin_Georeferencia_5);
+        function pop_CCNN_Tituladas_Georeferenciadas_6(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">FUENTE</th>\
+                        <td>' + (feature.properties['FUENTE'] !== null ? autolinker.link(feature.properties['FUENTE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">RESREG</th>\
+                        <td>' + (feature.properties['RESREG'] !== null ? autolinker.link(feature.properties['RESREG'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">LEYTIT</th>\
+                        <td>' + (feature.properties['LEYTIT'] !== null ? autolinker.link(feature.properties['LEYTIT'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">PROCES</th>\
+                        <td>' + (feature.properties['PROCES'] !== null ? autolinker.link(feature.properties['PROCES'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">NOMCOM</th>\
+                        <td>' + (feature.properties['NOMCOM'] !== null ? autolinker.link(feature.properties['NOMCOM'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SECTOR</th>\
+                        <td>' + (feature.properties['SECTOR'] !== null ? autolinker.link(feature.properties['SECTOR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">RESTIT</th>\
+                        <td>' + (feature.properties['RESTIT'] !== null ? autolinker.link(feature.properties['RESTIT'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">FERETI</th>\
+                        <td>' + (feature.properties['FERETI'] !== null ? autolinker.link(feature.properties['FERETI'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">NUMTIT</th>\
+                        <td>' + (feature.properties['NUMTIT'] !== null ? autolinker.link(feature.properties['NUMTIT'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">FECTIT</th>\
+                        <td>' + (feature.properties['FECTIT'] !== null ? autolinker.link(feature.properties['FECTIT'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">PARREG</th>\
+                        <td>' + (feature.properties['PARREG'] !== null ? autolinker.link(feature.properties['PARREG'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">FEINRE</th>\
+                        <td>' + (feature.properties['FEINRE'] !== null ? autolinker.link(feature.properties['FEINRE'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">PROVIN</th>\
+                        <td>' + (feature.properties['PROVIN'] !== null ? autolinker.link(feature.properties['PROVIN'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">DISTRI</th>\
+                        <td>' + (feature.properties['DISTRI'] !== null ? autolinker.link(feature.properties['DISTRI'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">FAMLIN</th>\
+                        <td>' + (feature.properties['FAMLIN'] !== null ? autolinker.link(feature.properties['FAMLIN'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">GRUETN</th>\
+                        <td>' + (feature.properties['GRUETN'] !== null ? autolinker.link(feature.properties['GRUETN'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">PERMAT</th>\
+                        <td>' + (feature.properties['PERMAT'] !== null ? autolinker.link(feature.properties['PERMAT'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">SUPMAT</th>\
+                        <td>' + (feature.properties['SUPMAT'] !== null ? autolinker.link(feature.properties['SUPMAT'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_CCNN_Tituladas_Georeferenciadas_6_0() {
+            return {
+                pane: 'pane_CCNN_Tituladas_Georeferenciadas_6',
+                opacity: 1,
+                color: 'rgba(255,190,235,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,215,230,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_CCNN_Tituladas_Georeferenciadas_6');
+        map.getPane('pane_CCNN_Tituladas_Georeferenciadas_6').style.zIndex = 406;
+        map.getPane('pane_CCNN_Tituladas_Georeferenciadas_6').style['mix-blend-mode'] = 'normal';
+        var layer_CCNN_Tituladas_Georeferenciadas_6 = new L.geoJson(json_CCNN_Tituladas_Georeferenciadas_6, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_CCNN_Tituladas_Georeferenciadas_6',
+            layerName: 'layer_CCNN_Tituladas_Georeferenciadas_6',
+            pane: 'pane_CCNN_Tituladas_Georeferenciadas_6',
+            onEachFeature: pop_CCNN_Tituladas_Georeferenciadas_6,
+            style: style_CCNN_Tituladas_Georeferenciadas_6_0,
+        });
+        bounds_group.addLayer(layer_CCNN_Tituladas_Georeferenciadas_6);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/CCNN_Tituladas_Georeferenciadas_6.png" /> CCNN_Tituladas_Georeferenciadas': layer_CCNN_Tituladas_Georeferenciadas_6,'<img src="legend/CCNN_Tituladas_Sin_Georeferencia_5.png" /> CCNN_Tituladas_Sin_Georeferencia': layer_CCNN_Tituladas_Sin_Georeferencia_5,'<img src="legend/CCCampasinasTituladas_4.png" /> CC Campasinas Tituladas': layer_CCCampasinasTituladas_4,'<img src="legend/Areas_Conservacion_Regional_Privada_3.png" /> Areas_Conservacion_Regional_Privada': layer_Areas_Conservacion_Regional_Privada_3,'PROVINCIAS<br /><table><tr><td style="text-align: center;"><img src="legend/PROVINCIAS_2_ALTOAMAZONAS0.png" /></td><td>ALTO AMAZONAS</td></tr><tr><td style="text-align: center;"><img src="legend/PROVINCIAS_2_DATEMDELMARAÑON1.png" /></td><td>DATEM DEL MARAÑON</td></tr><tr><td style="text-align: center;"><img src="legend/PROVINCIAS_2_LORETO2.png" /></td><td>LORETO</td></tr><tr><td style="text-align: center;"><img src="legend/PROVINCIAS_2_MARISCALRAMONCASTILLA3.png" /></td><td>MARISCAL RAMON CASTILLA</td></tr><tr><td style="text-align: center;"><img src="legend/PROVINCIAS_2_MAYNAS4.png" /></td><td>MAYNAS</td></tr><tr><td style="text-align: center;"><img src="legend/PROVINCIAS_2_PUTUMAYO5.png" /></td><td>PUTUMAYO</td></tr><tr><td style="text-align: center;"><img src="legend/PROVINCIAS_2_REQUENA6.png" /></td><td>REQUENA</td></tr><tr><td style="text-align: center;"><img src="legend/PROVINCIAS_2_UCAYALI7.png" /></td><td>UCAYALI</td></tr></table>': layer_PROVINCIAS_2,'<img src="legend/LORETO_1.png" /> LORETO': layer_LORETO_1,"Google Satellite": layer_GoogleSatellite_0,},{collapsed:false}).addTo(map);
+        setBounds();
+        var i = 0;
+        layer_PROVINCIAS_2.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['q2wHide_NOMOBJ'] !== null?String('<div style="color: #ef1202; font-size: 5pt; font-weight: bold; font-family: \'MS Shell Dlg 2\', sans-serif;">' + layer.feature.properties['q2wHide_NOMOBJ']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_PROVINCIAS_2'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        resetLabels([layer_PROVINCIAS_2,layer_Areas_Conservacion_Regional_Privada_3,layer_CCCampasinasTituladas_4,layer_CCNN_Tituladas_Sin_Georeferencia_5,layer_CCNN_Tituladas_Georeferenciadas_6]);
+        map.on("zoomend", function(){
+            resetLabels([layer_PROVINCIAS_2,layer_Areas_Conservacion_Regional_Privada_3,layer_CCCampasinasTituladas_4,layer_CCNN_Tituladas_Sin_Georeferencia_5,layer_CCNN_Tituladas_Georeferenciadas_6]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_PROVINCIAS_2,layer_Areas_Conservacion_Regional_Privada_3,layer_CCCampasinasTituladas_4,layer_CCNN_Tituladas_Sin_Georeferencia_5,layer_CCNN_Tituladas_Georeferenciadas_6]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_PROVINCIAS_2,layer_Areas_Conservacion_Regional_Privada_3,layer_CCCampasinasTituladas_4,layer_CCNN_Tituladas_Sin_Georeferencia_5,layer_CCNN_Tituladas_Georeferenciadas_6]);
+        });
+        </script>
+    </body>
+</html>
